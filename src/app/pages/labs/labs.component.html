@@ -19,23 +19,35 @@
 
   <hr />
   <p>person: {{ person.name }}</p>
-  <p>age: {{ person.age }}</p>
-  <img [src]="person.avatar" [alt]="person.name" />
+  <p>age: {{ person().age }}</p>
+  <img [src]="person().avatar" [alt]="person.name" />
 
   <hr />
   <button (click)="clickHandler()">click me</button>
   <button (dblclick)="clickHandler()">double me</button>
   <p>(change)</p>
-  <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+  <input
+    type="number"
+    [value]="person().age"
+    (change)="changeHandler($event)"
+  />
   <hr />
   <p>(change)</p>
-  <input type="text" [value]="person.name" (change)="changeHandler($event)" />
+  <input type="text" [value]="person().name" (change)="changeHandler($event)" />
   <hr />
   <p>(keydown)</p>
-  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+  <input
+    type="text"
+    [value]="person().name"
+    (keydown)="keydownHandler($event)"
+  />
   <hr />
   <p>(keydown + atajo teclado)</p>
-  <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
+  <input
+    type="text"
+    [value]="person().name"
+    (keydown.shift.t)="clickHandler()"
+  />
   <hr />
   <h1>Signals</h1>
   <input type="text" [value]="name()" (change)="changeHandler($event)" />
@@ -44,9 +56,23 @@
 
   <hr />
   <ul>
-    <p>total: {{tasks().length}}</p>
-    <li *ngFor="let task of tasks(); index as i">
-     {{i}} {{ task }}
-    </li>
+    <p>total: {{ tasks().length }}</p>
+    <li *ngFor="let task of tasks(); index as i">{{ i }} {{ task }}</li>
   </ul>
+
+  <hr />
+  <input
+  type="number"
+  [value]="person().age"
+  (change)="changeAge($event)"
+/>
+  <div *ngIf="1 === 1">My content</div>
+  <div *ngIf="name() === 'Matias'">Soy Matias</div>
+  <h2>Renderizado condicional</h2>
+  <div *ngIf="person().name === 'Nehuen' && person().age > 18;else elseBlock">
+    Soy Matias y Soy mayor de 18
+  </div>
+  <ng-template #elseBlock>
+    Soy Nehuen y soy menor de 18
+  </ng-template>
 </div>

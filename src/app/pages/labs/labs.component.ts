@@ -22,11 +22,11 @@ export class LabsComponent {
   img =
     'https://www.lavoz.com.ar/resizer/zU6FRuN30kNbMi1SWMTpuJ0pMLg=/980x640/smart/filters:quality(75):format(webp)/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/GI4DEODEGNSTAMJYGZRWKN3FGQ.jpg';
 
-  person = {
+  person = signal({
     name: 'Nehuen',
     age: 29,
     avatar: 'https://avatars.githubusercontent.com/u/96670695?v=4',
-  };
+  });
 
   clickHandler() {
     alert('Me estan haciendo click');
@@ -41,5 +41,16 @@ export class LabsComponent {
   keydownHandler(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
     console.log(input.value);
+  }
+
+  changeAge(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update(prevState => {
+     return {
+      ...prevState,
+      age: parseInt(newValue, 10)
+     } 
+    })
   }
 }
