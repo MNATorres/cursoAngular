@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css',
 })
@@ -27,6 +29,14 @@ export class LabsComponent {
     age: 29,
     avatar: 'https://avatars.githubusercontent.com/u/96670695?v=4',
   });
+
+  colorControl = new FormControl()
+
+  constructor() {
+    this.colorControl.valueChanges.subscribe(value => {
+      console.log(value)
+    })
+  }
 
   clickHandler() {
     alert('Me estan haciendo click');
