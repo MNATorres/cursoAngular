@@ -1,16 +1,34 @@
 .container {
-    padding: 3rem;
+  padding: 3rem;
 }
 
 .container button {
-   border: 1px solid rebeccapurple;
-   padding: 7px;
-   margin: 5px;
-   cursor: pointer;
+  border: 1px solid rebeccapurple;
+  padding: 7px;
+  margin: 5px;
+  cursor: pointer;
 }
 
 .container button:hover {
-    border: 1px solid rgb(55, 10, 100);
-    background-color: rgb(106, 75, 138);
-    color: white;
- }
+  border: 1px solid rgb(55, 10, 100);
+  background-color: rgb(106, 75, 138);
+  color: white;
+}
+
+.box {
+  height: 10px;
+  display: block;
+  background-color: red;
+}
+
+.message-error {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  opacity: 0;
+  transition: all linear .5s;
+}
+
+.message-error.show {
+  opacity: 1;
+}

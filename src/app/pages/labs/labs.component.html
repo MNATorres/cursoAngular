@@ -61,22 +61,16 @@
   </ul>
 
   <hr />
-  <input
-  type="number"
-  [value]="person().age"
-  (change)="changeAge($event)"
-/>
+  <input type="number" [value]="person().age" (change)="changeAge($event)" />
   <div *ngIf="1 === 1">My content</div>
   <div *ngIf="name() === 'Matias'">Soy Matias</div>
   <h2>Renderizado condicional</h2>
-  <div *ngIf="person().name === 'Nehuen' && person().age > 18;else elseBlock">
+  <div *ngIf="person().name === 'Nehuen' && person().age > 18; else elseBlock">
     Soy Matias y Soy mayor de 18
   </div>
-  <ng-template #elseBlock>
-    Soy Nehuen y soy menor de 18
-  </ng-template>
+  <ng-template #elseBlock> Soy Nehuen y soy menor de 18 </ng-template>
 
-  <hr/>
+  <hr />
   <input type="text" [value]="person().name" (change)="changeName($event)" />
   <div [ngSwitch]="person().name">
     <p *ngSwitchCase="'matias'">yo soy Matias</p>
@@ -85,7 +79,31 @@
     <p *ngSwitchCase="'torres'">yo soy Torres</p>
     <p *ngSwitchDefault>NO SOY NADIE</p>
   </div>
-  <hr/>
-  <input type="color" [formControl]="colorControl">
-  <p>color: {{colorControl.value}}</p>
+  <hr />
+  <input type="color" [formControl]="colorControl" />
+  <p>color: {{ colorControl.value }}</p>
+  <svg>
+    <rect
+      x="0"
+      y="0"
+      width="100"
+      height="100"
+      [attr.fill]="colorControl.value"
+    />
+  </svg>
+  <hr />
+  <input type="number" [formControl]="widthControl" />
+  <span class="box" [style.width.px]="widthControl.value"></span>
+  <hr />
+  <p>
+    <input type="text" [formControl]="nameControl" /> <br />
+    <span
+      class="message-error"
+      [class.show]="nameControl.invalid && nameControl.touched"
+      >Nombre invalid</span
+    >
+  </p>
+  <p>
+    <input type="text" />
+  </p>
 </div>
