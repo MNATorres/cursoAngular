@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Task } from '../../models/taks.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -14,7 +15,7 @@ export class HomeComponent {
     {
       id: Date.now(),
       title: 'Crear proyecto',
-      completed: false,
+      completed: true,
     },
     {
       id: Date.now(),
@@ -28,10 +29,20 @@ export class HomeComponent {
     },
   ]);
 
-  changeHandle(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const newTask = input.value;
-    this.addTask(newTask);
+  newTaskControl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
+
+  changeHandler() {
+    if (this.newTaskControl.valid) {
+      const value = this.newTaskControl.value.trim();
+
+      if (value !== '') {
+        this.addTask(value);
+        this.newTaskControl.setValue('');
+      }
+    }
   }
 
   addTask(title: string) {
@@ -48,14 +59,14 @@ export class HomeComponent {
   updateTask(index: number) {
     this.tasks.update((tasks) => {
       return tasks.map((task, position) => {
-        if(position === index) {
+        if (position === index) {
           return {
             ...task,
             completed: !task.completed,
-          }
+          };
         }
-        return task
-      })
-    })
+        return task;
+      });
+    });
   }
 }
