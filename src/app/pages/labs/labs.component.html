@@ -64,11 +64,25 @@
   <input type="number" [value]="person().age" (change)="changeAge($event)" />
   <div *ngIf="1 === 1">My content</div>
   <div *ngIf="name() === 'Matias'">Soy Matias</div>
+
+  <!-- nueva sintaxis de if -->
+  @if (name() === 'Matias'){
+  <div>Soy Matias, renderizado con la nueva sintaxis</div>
+  }
+
   <h2>Renderizado condicional</h2>
   <div *ngIf="person().name === 'Nehuen' && person().age > 18; else elseBlock">
     Soy Matias y Soy mayor de 18
   </div>
   <ng-template #elseBlock> Soy Nehuen y soy menor de 18 </ng-template>
+  <!-- nueva sintaxis de if, else -->
+
+  <h2>if, else - nueva sintaxis</h2>
+  @if(person().name === 'Nehuen' && person().age > 18){
+  <strong>Soy Matias, y soy mayor de 18 años</strong>
+  } @else {
+  <i>Soy Matias, y soy menor de edad</i>
+  }
 
   <hr />
   <input type="text" [value]="person().name" (change)="changeName($event)" />
